@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Calculator</title>
+    <style>
+        @font-face {
+            font-family: 'GmarketSansMedium';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+         body {
+             font-family: GmarketSansMedium;
+             background-color: #FAF0E6;
+             margin: 0;
+             padding: 20px
+         }
+
+        h1 {
+            color: #352F44;
+            margin: 0 auto;
+            max-width: 400px;
+            text-align: center;
+            font-size: 30px;
+        }
+
+        form {
+            background: #B9B4C7;
+            padding: 20px;
+            margin: 15px auto;
+            border-radius: 5px;
+            box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            color: #352F44;
+            font-size: 20px;
+        }
+
+        input, select {
+            display: block;
+            width: 100%;
+            padding: 3px;
+            margin-bottom: 10px;
+            font-size: 15px;
+            border: 1px solid #5C5470;
+            border-radius: 5px;
+        }
+
+        .result, .error {
+            max-width: 400px;
+            margin: 10px auto;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .result {
+            background-color: #5C5470;
+            color: #FAF0E6;
+        }
+
+        .error {
+            background-color: #AE445A;
+            color: #ECDFCC;
+        }
+
+        button {
+            background-color: #352F44;
+            color: #FAF0E6;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 20px;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            width: 100%;
+            font-size: 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover{
+            background-color: #5C5470;
+            transition: all 0.3s;
+        }
+    </style>
+</head>
+<body>
+<h1>Simple Calculator</h1>
+<form th:action="@{/calculator}" method="post">
+    <label for="num1">Number 1:</label>
+    <input type="number" step="any" id="num1" name="num1" required/>
+
+    <label for="num2">Number 2:</label>
+    <input type="number" step="any" id="num2" name="num2" required/>
+
+    <label for="operation">Operation: </label>
+    <select id="operation" name="operation">
+        <option value="add">Add(+)</option>
+        <option value="subtract">Subtract(-)</option>
+        <option value="multiply">Multiply(×)</option>
+        <option value="divide">Divide(÷)</option>
+    </select>
+
+    <button type="submit">Calculate</button>
+</form>
+
+<div th:if="${errorMessage}" class="error">
+    <h2>Error: <span th:text="${errorMessage}"></span></h2>
+</div>
+
+<div th:if="${result}" class="result">
+    <h2>Result: <span th:text="${result}"></span></h2>
+</div>
+</body>
+</html>
